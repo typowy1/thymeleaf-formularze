@@ -8,12 +8,28 @@
 
 <h2>Strona główna</h2>
 
+<!--wyświetlimy liste użytkowników, będziemy iterować po wszystkich użytkownikach za pomocą each-->
+<ul>
+    <li th:each="user: ${users}">
+
+        <span th:text="|${user.firstName} ${user.lastName}|"></span>
+<!--dodajemy edycje użytkownika po id-->
+        <a th:href="|/edit?id=${user.id}|">(Edytuj)</a>
+    </li>
+</ul>
+
 <!--na adres dodaj zostanie przesłana/dodana osoba i wrzucona do bazy danych-->
 <!--ten formularz jest odpowiedzialny za uzupełnianie tego obiektu user-->
-<form action="/dodaj" method="post" th:object="user">
+<form action="/dodaj" method="post" th:object="${user}">
 
-    <input type="text" placeholder="Imię">
-    <input type="text" placeholder="Nazwisko">
+<!--wskazuje że 1 pole jest odpowiedzialne za uzupełnianie pola firstName z klasy user-->
+    <input type="text" placeholder="Imię" th:field="*{firstName}">
+    <input type="text" placeholder="Nazwisko" th:field="*{lastName}">
+    <textarea  th:field="*{userDescription}"></textarea>
+    <select th:field="*{gender}">
+        <option value="female">Kobieta</option>
+        <option value="male">Mężczyzna</option>
+    </select>
     <input type="submit" value="Dodaj!">
 
 </form>

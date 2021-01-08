@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--edycja użytkownika-->
+<h2 th:text="|Edycja użytkownika ${user.firstName} ${user.lastName}|"></h2>
+
+<!--dodajemy możliwosć edycji-->
+
+<!--na adres dodaj zostanie przesłana/dodana osoba i wrzucona do bazy danych-->
+<!--ten formularz jest odpowiedzialny za uzupełnianie tego obiektu user-->
+<form action="/edit" method="post" th:object="${user}">
+
+    <!--wskazuje że 1 pole jest odpowiedzialne za uzupełnianie pola firstName z klasy user-->
+<!--schowaliśmy id używający typu hidden-->
+    <input type="hidden" th:field="*{id}">
+    <input type="text" placeholder="Imię" th:field="*{firstName}">
+    <input type="text" placeholder="Nazwisko" th:field="*{lastName}">
+    <input type="submit" value="Edytuj!">
+
+</form>
+
+</body>
+</html>
